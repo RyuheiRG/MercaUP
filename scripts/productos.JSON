@@ -16,7 +16,7 @@
         "switchType": "Brown",
         "wireless": true
       },
-      "imagePath": "../assets/keyboard.jpg"
+      "imagePath": "assets/keyboard.jpg"
     },
     {
       "productId": "ITM-002",
@@ -29,7 +29,7 @@
         "resolution": "4K",
         "refreshRate": "60Hz"
       },
-      "imagePath": "../assets/monitor.jpg"
+      "imagePath": "assets/monitor.jpg"
     },
     {
       "productId": "ITM-003",
@@ -42,7 +42,7 @@
         "ports": 24,
         "managed": true
       },
-      "imagePath": "../assets/switch.jpg"
+      "imagePath": "assets/switch.jpg"
     },
     {
       "productId": "ITM-004",
@@ -55,7 +55,7 @@
         "vram": "12GB",
         "architecture": "Ada Lovelace"
       },
-      "imagePath": "../assets/gpu.jpg"
+      "imagePath": "assets/gpu.jpg"
     }
   ]
 }
