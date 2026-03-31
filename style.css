@@ -28,6 +28,7 @@ body {
     padding: 0 20px;
 }
 
+/* ----------------------------- Header --------------------------- */
 .main-header {
     background: var(--oxford-blue);
     padding: 20px 0;
@@ -37,32 +38,66 @@ body {
     box-shadow: var(--shadow);
 }
 
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
 .logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    letter-spacing: 2px;
-    color: var(--white); 
+    letter-spacing: 3px;
+    color: var(--white);
 }
 
 .main-nav a {
+    color: var(--white);
     text-decoration: none;
-    color: var(--lavender-web); 
-    font-size: 0.85rem;
     font-weight: 600;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
-.main-nav a:hover {
-    color: var(--jordy-blue);
+.main-nav ul {
+    display: flex;
+    flex-direction: row;    
+    justify-content: center; 
+    list-style: none;
+    gap: 30px;              
 }
 
+.cart-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.cart-container svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--white);
+}
+
+.cart-container:hover {
+    transform: scale(1.1);
+}
+/* ----------------------------------------------- */
+
+/* ----------------------------- Banner principal --------------------------- */
 .hero-banner {
     height: 60vh;
-    background: linear-gradient(rgba(25, 35, 56, 0.7), rgba(49, 72, 122, 0.7)), 
-                url('assets/UP.png') no-repeat center center;
+    background-image: linear-gradient(rgba(25, 35, 56, 0.7), rgba(49, 72, 122, 0.7)), 
+                      url('../assets/UP.png');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -70,6 +105,7 @@ body {
     color: var(--white);
 }
 
+/* ----------------------------- Catálogo de productos --------------------------- */
 .catalog-section {
     width: 100%;
     padding: 60px 0;
@@ -87,6 +123,7 @@ body {
     padding: 30px 0;
 }
 
+/* ---------- Tarjetas de producto ----------- */
 .product-card {
     background: var(--lavender-web); 
     padding: 20px;
@@ -146,7 +183,9 @@ body {
     padding-left: 0;
     margin-bottom: 10px;
 }
+/* ----------------------------------------------- */
 
+/* -------- Botones de agregar al carrito y agotado --------- */
 .btn-agregar {
     background: var(--yinmn-blue);
     color: var(--white);
@@ -174,23 +213,28 @@ body {
     font-weight: 600;
     opacity: 0.7;
 }
+/* ----------------------------------------------- */
 
+/* ------------ Barra de búsqueda ---------------- */
 #search-bar {
     width: 30%;
-    padding: 8px 12px;
-    border-color: var(--oxford-blue);
+    min-width: 250px;
+    padding: 10px 15px;
+    border: 2px solid var(--jordy-blue);
     margin-top: 15px;
     box-shadow: var(--shadow);
-    border-radius: 2px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
 }
 
 #search-bar:focus {
     outline: none;
     border-color: var(--yinmn-blue);
-    box-shadow: 0 0 5px var(--yinmn-blue);
+    box-shadow: 0 0 8px var(--jordy-blue);
 }
+/* ----------------------------------------------- */
 
-/* Footer */
+/* -------------------- Footer ------------------- */
 .main-footer {
     background: var(--oxford-blue);
     color: var(--lavender-web);
@@ -208,40 +252,89 @@ body {
         background: var(--yinmn-blue);
     }
 }
+/* ----------------------------------------------- */
 
-
-.nav-container {
+/* ----------------------------- Estilos para el carrito lateral --------------------------- */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Oculto fuera de la pantalla por defecto */
+    width: 350px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
+    padding: 20px;
     display: flex;
-    flex-direction: column; 
-    align-items: center;    
-    gap: 15px;              
+    flex-direction: column;
+    color: var(--oxford-blue);
 }
 
-.logo {
+.cart-drawer.open {
+    right: 0; /* Desliza hacia adentro */
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--lavender-web);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.cart-header h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--white);
-    text-align: center;
-    width: 100%;
+    font-size: 1.5rem;
 }
 
-.main-nav ul {
+.close-cart-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--yinmn-blue);
+}
+
+.cart-items-container {
+    flex-grow: 1;
+    overflow-y: auto;
     display: flex;
-    flex-direction: row;    
-    justify-content: center; 
-    list-style: none;
-    gap: 30px;              
-    padding: 10px 0;
-    flex-wrap: wrap;        
+    flex-direction: column;
+    gap: 15px;
 }
 
-.main-nav a {
-    text-decoration: none;
-    color: var(--lavender-web);
+.cart-item-row {
+    display: flex;
+    justify-content: space-between;
+    background: var(--lavender-web);
+    padding: 10px;
+    border-radius: 6px;
     font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase; 
-    transition: color 0.3s;
 }
+
+.cart-footer {
+    border-top: 2px solid var(--lavender-web);
+    padding-top: 15px;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.btn-checkout {
+    width: 100%;
+    background: var(--yinmn-blue);
+    color: var(--white);
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-checkout:hover {
+    background: var(--oxford-blue);
+}
+/* ----------------------------------------------- */
