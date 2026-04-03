@@ -1,68 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Merca UP - Tu Tienda Online</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+    <title>MercaUP - Tu Tienda Tecnológica</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- menú Superior -->
     <header class="main-header">
-      <div class="container nav-container">
-        <div class="logo">Merca UP</div>
+      <div class="nav-container container">
+        <div class="logo">MercaUP</div>
         <nav class="main-nav">
           <ul>
-            <li><a href="#">INICIO</a></li>
-            <li><a href="#">INFO</a></li>
-            <li><a href="#">EVENTOS</a></li>
-            <li><a href="#">NOSOTROS</a></li>
-            <li><a href="#">CONTACTO</a></li>
+            <!-- botones con enlaces anclados (Scroll) -->
+            <li><a href="#inicio">INICIO</a></li>
+            <li><a href="#productos">CATÁLOGO</a></li>
+            <li><a href="#nosotros">NOSOTROS</a></li>
+            <li><a href="#eventos">EVENTOS</a></li>
+            <li><a href="#info">INFO</a></li>
           </ul>
         </nav>
-        <div class="cart-container"></div>
+        <div class="cart-container" title="Ver Carrito">
+          <!-- el carrito se insertará aquí mediante JS -->
+        </div>
       </div>
     </header>
 
-    <section class="hero-banner">
-      <div class="hero-content">
-        <div class="hero-image-placeholder">
-          <div class="overlay">
-            <h1>MERCA UP</h1>
-            <p>BIENVENIDOS A TU TIENDA IDEAL</p>
-          </div>
-        </div>
+    <!-- sección Inicio -->
+    <section id="inicio" class="hero-banner">
+      <div class="container">
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px;">Equipa tu Mundo</h1>
+        <p style="font-size: 1.2rem;">Encuentra el mejor hardware, software y periféricos de alto rendimiento.</p>
       </div>
     </section>
 
     <main class="container">
-      <section class="catalog-section">
-        <h2>NUESTRO CATÁLOGO</h2>
-        <p class="section-subtitle">Explora nuestras últimas novedades</p>
-        <input type="text" id="search-bar" placeholder="Buscar productos..." />
+      <!-- sección Catálogo -->
+      <section id="productos" class="catalog-section" style="margin-top: 0; border-radius: 0;">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--oxford-blue); font-size: 2rem;">Nuestro Catálogo</h2>
+        <input type="text" id="search-bar" placeholder="Buscar productos o categorías..." />
         <div id="catalogo" class="product-grid">
-          <p>mejores productos</p>
+          <!-- el catálogo de productos se cargará aquí -->
         </div>
+      </section>
+
+      <!-- sección Nosotros -->
+      <section id="nosotros" style="padding: 60px 20px; text-align: center; background-color: var(--lavender-web); scroll-margin-top: 90px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px;">Sobre Nosotros</h2>
+        <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">En MercaUP somos apasionados por la tecnología. Nuestro objetivo es brindarte la mejor calidad del mercado, asegurando garantía y un servicio excepcional a cada uno de nuestros clientes.</p>
+      </section>
+
+      <!-- sección Eventos -->
+      <section id="eventos" style="padding: 60px 20px; text-align: center; scroll-margin-top: 90px;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px;">Próximos Eventos</h2>
+        <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">¡Mantente al tanto de nuestros lanzamientos exclusivos, torneos y webinars! Próximamente anunciaremos el calendario de primavera 2026.</p>
       </section>
     </main>
 
-    <footer class="main-footer">
+    <!-- sección Info / Footer -->
+    <footer id="info" class="main-footer">
       <div class="container footer-container">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--white); margin-bottom: 10px;">Más Información</h2>
+        <p>Contáctanos: contacto@mercaup.com | Teléfono: +52 961 245 3345</p>
         <div class="social-icons">
           <a href="#">FB</a>
           <a href="#">TW</a>
           <a href="#">IG</a>
         </div>
-        <p>&copy; Merca UP, no vuelva .</p>
+        <p class="footer-copyright">&copy; 2026 MercaUP. Todos los derechos reservados.</p>
       </div>
     </footer>
 
-    <script src="scripts/login.js" defer></script>
-    <script type="module" src="scripts/productos.js" defer></script>
+    <script type="module" src="scripts/productos.js"></script>
   </body>
 </html>

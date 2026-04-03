@@ -9,6 +9,12 @@
     --shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
+/* ----------------------------- omportamiento de Scroll --------------------------- */
+html {
+    scroll-behavior: smooth;
+}
+/* ----------------------------------------------- */
+
 * {
     margin: 0;
     padding: 0;
@@ -36,6 +42,8 @@ body {
     top: 0;
     z-index: 1000;
     box-shadow: var(--shadow);
+    width: 100%;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-container {
@@ -103,6 +111,8 @@ body {
     justify-content: center;
     text-align: center;
     color: var(--white);
+    scroll-margin-top: 90px; /* Compensa la altura del menú fijo para que no tape la sección */
+    transition: padding-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ----------------------------- Catálogo de productos --------------------------- */
@@ -113,6 +123,8 @@ body {
     background-color: var(--white); 
     margin-top: -20px;
     border-radius: 30px 30px 0 0; 
+    scroll-margin-top: 90px; /* Compensa la altura del menú fijo para que no tape el catálogo */
+    transition: padding-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .product-grid {
@@ -240,17 +252,37 @@ body {
     color: var(--lavender-web);
     padding: 40px 0;
     text-align: center;
+    scroll-margin-top: 90px; /* Compensa la altura del menú fijo */
+    transition: padding-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Esto separa los iconos de redes sociales del texto final */
 }
 
 .social-icons {
-    & a {
-        color: var(--white);
-        border: 1px solid var(--yinmn-blue);
-        padding: 8px 12px;
-    }
-    & a:hover {
-        background: var(--yinmn-blue);
-    }
+    display: flex;
+    gap: 15px; /* Espacio entre los botones de redes sociales */
+}
+
+.social-icons a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 600;
+}
+
+.social-icons a:hover {
+    color: var(--jordy-blue);
+}
+
+.footer-copyright {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--jordy-blue);
 }
 /* ----------------------------------------------- */
 
@@ -258,7 +290,7 @@ body {
 .cart-drawer {
     position: fixed;
     top: 0;
-    right: -400px; /* Oculto fuera de la pantalla por defecto */
+    right: -350px; /* Oculto fuera de la pantalla por defecto, ajustado a su width */
     width: 350px;
     height: 100vh;
     background: var(--white);
@@ -338,3 +370,117 @@ body {
     background: var(--oxford-blue);
 }
 /* ----------------------------------------------- */
+
+/* ----------------------------- pago con tarjeta --------------------------- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.payment-modal {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 400px;
+    color: var(--oxford-blue);
+    font-family: 'Poppins', sans-serif;
+}
+
+.payment-modal h2 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.payment-form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.payment-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.payment-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--lavender-web);
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.payment-form-group input:focus {
+    outline: none;
+    border-color: var(--yinmn-blue);
+}
+
+.payment-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.btn-cancelar {
+    flex: 1;
+    background-color: var(--lavender-web);
+    color: var(--oxford-blue);
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #c5d1e8;
+}
+
+.btn-pagar {
+    flex: 1;
+    background-color: var(--yinmn-blue);
+    color: var(--white);
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.btn-pagar:hover {
+    background-color: var(--oxford-blue);
+}
+/* ----------------------------------------------- */
+
+/* ------------------- Carrito Responsivo -------------------- */
+@media (min-width: 992px) {
+    body.drawer-is-open .main-header {
+        /* Reduce el ancho del header para dejar espacio al carrito */
+        width: calc(100% - 350px);
+    }
+
+    body.drawer-is-open .hero-banner,
+    body.drawer-is-open .catalog-section,
+    body.drawer-is-open .main-footer {
+        /* Empuja el contenido principal hacia la izquierda */
+        padding-right: 350px;
+    }
+}
+/* ----------------------------------------------------------- */
