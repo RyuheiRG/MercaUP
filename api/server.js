@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs').promises;
@@ -8,8 +9,16 @@ const PORT = process.env.PORT ?? 3000;
 
 const DATA_FILE = path.join(__dirname, 'data', 'productos.json');
 
-app.use(cors());
+// Configuración de CORS para producción
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || '*', // Cambiar en AWS a tu dominio real
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json()); 
+
+// Health Check para AWS (Load Balancers / Elastic Beanstalk)
+app.get('/health', (req, res) => res.status(200).send('OK'));
 
 app.get('/api/productos', async (req, res) => {
     try {
@@ -37,6 +46,8 @@ app.post('/api/checkout', async (req, res) => {
             return res.status(400).json({ success: false, message: "Payload inválido o carrito vacío." });
         }
 
+        // TODO: Migrar esta lógica a una Base de Datos real (DynamoDB, RDS, MongoDB)
+        // para evitar condiciones de carrera y pérdida de datos en despliegues.
         const rawData = await fs.readFile(DATA_FILE, 'utf8');
         const database = JSON.parse(rawData);
 
@@ -72,7 +83,19 @@ app.post('/api/checkout', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`[Servidor Principal] API Asíncrona iniciada y escuchando en el puerto ${PORT}`);
     console.log(`[Ruta Data] Utilizando: ${DATA_FILE}`);
 });
+
+// Graceful shutdown para proteger productos.json en reinicios de EC2/PM2
+const gracefulShutdown = () => {
+    console.log('\n[Sistema] Recibida señal de apagado. Cerrando servidor de forma segura...');
+    server.close(() => {
+        console.log('[Sistema] Servidor cerrado. Proceso terminado.');
+        process.exit(0);
+    });
+};
+
+process.on('SIGINT', gracefulShutdown);
+process.on('SIGTERM', gracefulShutdown);
